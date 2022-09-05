@@ -11,7 +11,7 @@ class MainPagerAdapter (fragment: FragmentActivity) : FragmentStateAdapter(fragm
     companion object{
         private const val ARG_OBJECT: String = "object"
     }
-    override fun getItemCount(): Int = 4
+    override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment {
         // Return a NEW fragment instance in createFragment(int)
