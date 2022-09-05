@@ -6,9 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.mymessageapp.R
 import com.example.mymessageapp.databinding.FragmentAllPostsBinding
 import com.example.mymessageapp.model.MessageData
+import com.example.mymessageapp.model.UserData
 import com.example.mymessageapp.view.PostsDetailActivity
 import com.example.mymessageapp.view.adapters.AllPostsRecyclerAdapter
 
@@ -38,24 +38,39 @@ class AllPostsFragment : Fragment() {
         PostsFragmentbinding = FragmentAllPostsBinding.inflate(inflater, container, false)
         PostsFragmentbinding!!.allPostsRecyclerView.adapter = AllPostsRecyclerAdapter(fillRecyclerTest())
         { post ->
-            onPostDetailActivity()
+            onPostDetailActivity(post)
         };
         // Inflate the layout for this fragment
         return PostsFragmentbinding!!.root
     }
 
-    private fun fillRecyclerTest(): List<MessageData>{
-        var postsList = listOf (
-            MessageData("sunt aut facere repellat provident occaecati excepturi optio reprehenderit", "", "" , ""),
-            MessageData("qui est esse", "", "" , ""),
-            MessageData("ea molestias quasi exercitationem repellat qui ipsa sit aut", "", "" , ""),
-            MessageData("eum et est occaecati", "", "" , "")
-                )
-        return postsList
+    private fun fillRecyclerTest(): List<MessageData> {
+        var userList = fillUserDataTest()
+        return listOf(
+            MessageData(
+                "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+                "hahahaha",
+                userList[0],
+                "yayayayuua"
+            ),
+            MessageData("qui est esse", "hohohoh", userList[1], "rkrkrkrk"),
+            MessageData("ea molestias quasi exercitationem repellat qui ipsa sit aut", "hahahaha", userList[2], "kakakaka"),
+            MessageData("eum et est occaecati", "gagagagag", userList[3], "hahahahahhaha")
+        )
     }
 
-    private fun onPostDetailActivity (){
+    private fun fillUserDataTest(): List<UserData> {
+        return listOf(
+            UserData("juan", "juan@gmail.com", "312456", "ww.juan.com"),
+            UserData("daniel", "daniel@gmail.com", "311438", "ww.daniel.com"),
+            UserData("felipe", "felipe@gmail.com", "316789", "ww.felipe.com"),
+            UserData("camilo", "camilo@gmail.com", "3167345", "ww.camilo.com")
+        )
+    }
+
+    private fun onPostDetailActivity (postData: MessageData){
         val intent = Intent(context, PostsDetailActivity:: class.java)
+        intent.putExtra("data", postData)
         startActivity(intent)
     }
 
