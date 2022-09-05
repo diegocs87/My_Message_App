@@ -70,7 +70,7 @@ class AllPostsFragment : Fragment() {
 
     private fun onPostDetailActivity (postData: MessageData){
         val intent = Intent(context, PostsDetailActivity:: class.java)
-        intent.putExtra("data", postData)
+        intent.putExtra(PostsDetailActivity.EXTRA_POST, postData)
         startActivity(intent)
     }
 
