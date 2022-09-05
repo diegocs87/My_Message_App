@@ -1,5 +1,6 @@
 package com.example.mymessageapp.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import com.example.mymessageapp.R
 import com.example.mymessageapp.databinding.FragmentAllPostsBinding
 import com.example.mymessageapp.model.MessageData
+import com.example.mymessageapp.view.PostsDetailActivity
 import com.example.mymessageapp.view.adapters.AllPostsRecyclerAdapter
 
 // TODO: Rename parameter arguments, choose names that match
@@ -35,8 +37,8 @@ class AllPostsFragment : Fragment() {
     ): View {
         PostsFragmentbinding = FragmentAllPostsBinding.inflate(inflater, container, false)
         PostsFragmentbinding!!.allPostsRecyclerView.adapter = AllPostsRecyclerAdapter(fillRecyclerTest())
-        { it ->
-
+        { post ->
+            onPostDetailActivity()
         };
         // Inflate the layout for this fragment
         return PostsFragmentbinding!!.root
@@ -50,6 +52,11 @@ class AllPostsFragment : Fragment() {
             MessageData("eum et est occaecati", "", "" , "")
                 )
         return postsList
+    }
+
+    private fun onPostDetailActivity (){
+        val intent = Intent(context, PostsDetailActivity:: class.java)
+        startActivity(intent)
     }
 
     companion object {
