@@ -24,6 +24,7 @@ class AllPostsRecyclerAdapter (private val posts: List<MessageData>, private val
     override fun onBindViewHolder(holder: AllPostsRecyclerAdapter.MessageHolder, position: Int) {
         val postId = posts[position]
         holder.setPostTittle(postId)
+        holder.itemView.setOnClickListener {postsItemClickedListener(postId)}
     }
 
     override fun getItemCount(): Int = posts.size
