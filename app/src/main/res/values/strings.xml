@@ -2,4 +2,12 @@
     <string name="app_name">MyMessageApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="descriptionTittle">Description</string>
+    <string name="userTittle">User</string>
+    <string name="nameTittle">Name</string>
+    <string name="mailTittle">Mail</string>
+    <string name="phoneTittle">Phone</string>
+    <string name="webTittle">Website</string>
+    <string name="commentsTittle">Comments</string>
 </resources>
