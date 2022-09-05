@@ -1,5 +1,6 @@
 package com.example.mymessageapp.view.adapters
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymessageapp.databinding.AllMessagesRecyclerItemBinding
@@ -13,21 +14,26 @@ class AllPostsRecyclerAdapter (private val posts: List<MessageData>, private val
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): AllPostsRecyclerAdapter.MessageHolder {
-        TODO("Not yet implemented")
+    ): MessageHolder {
+        postCardViewItemBinding = AllMessagesRecyclerItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent, false);
+        return MessageHolder(postCardViewItemBinding);
     }
 
     override fun onBindViewHolder(holder: AllPostsRecyclerAdapter.MessageHolder, position: Int) {
-        TODO("Not yet implemented")
+        val postId = posts[position]
+        holder.setPostTittle(postId)
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getItemCount(): Int = posts.size
 
     class MessageHolder(private val cardViewBinding: AllMessagesRecyclerItemBinding):
         RecyclerView.ViewHolder(cardViewBinding.root) {
 
+            fun setPostTittle(postId: MessageData){
+                cardViewBinding.postTittle.text = postId.Tittle
+            }
     }
 
 }
