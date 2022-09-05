@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.mymessageapp.R
+import com.example.mymessageapp.databinding.FragmentAllPostsBinding
+import com.example.mymessageapp.model.MessageData
+import com.example.mymessageapp.view.adapters.AllPostsRecyclerAdapter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +25,8 @@ class AllPostsFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private var PostsFragmentbinding: FragmentAllPostsBinding? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,8 +39,23 @@ class AllPostsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        PostsFragmentbinding = FragmentAllPostsBinding.inflate(inflater, container, false)
+        PostsFragmentbinding!!.allPostsRecyclerView.adapter = AllPostsRecyclerAdapter(fillRecyclerTest())
+        { it ->
+
+        };
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_all_posts, container, false)
+        return PostsFragmentbinding!!.root
+    }
+
+    private fun fillRecyclerTest(): List<MessageData>{
+        var postsList = listOf (
+            MessageData("sunt aut facere repellat provident occaecati excepturi optio reprehenderit", "", "" , ""),
+            MessageData("qui est esse", "", "" , ""),
+            MessageData("ea molestias quasi exercitationem repellat qui ipsa sit aut", "", "" , ""),
+            MessageData("eum et est occaecati", "", "" , "")
+                )
+        return postsList
     }
 
     companion object {

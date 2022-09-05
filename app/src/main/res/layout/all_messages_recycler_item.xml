@@ -20,7 +20,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:textSize = "24sp"
-            android:text="sunt aut facere repellat provident occaecati excepturi optio reprehenderit"
+            tools:text=""
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
