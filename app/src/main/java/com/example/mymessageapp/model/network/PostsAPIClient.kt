@@ -6,7 +6,6 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface PostsAPIClient {
-
     @GET("/posts")
     suspend fun getAllPosts() : Response<List<PostsDataItem>>
 }

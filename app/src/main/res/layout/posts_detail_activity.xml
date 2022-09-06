@@ -19,8 +19,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Character Detail Section -->
-
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -231,7 +229,7 @@
         </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/characterFavorite"
+            android:id="@+id/postFavorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
