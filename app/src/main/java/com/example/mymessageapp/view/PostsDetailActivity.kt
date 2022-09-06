@@ -7,18 +7,19 @@ import com.example.mymessageapp.databinding.PostsDetailActivityBinding
 import com.example.mymessageapp.model.MessageData
 import com.example.mymessageapp.model.data.PostsDataItem
 import com.example.mymessageapp.view.adapters.CommentRecyclerAdapter
+import com.example.mymessageapp.viewmodel.CommentsViewModel
 import com.example.mymessageapp.viewmodel.UsersViewModel
 
 class PostsDetailActivity : AppCompatActivity() {
 
     private lateinit var detailActivityBinding : PostsDetailActivityBinding
     private val usersViewModel: UsersViewModel by viewModels()
+    private val commentsViewModel: CommentsViewModel by viewModels ()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         detailActivityBinding = PostsDetailActivityBinding.inflate(layoutInflater)
         setContentView(detailActivityBinding.root)
-        detailActivityBinding.rvCommentsList.adapter = CommentRecyclerAdapter(fillComments())
         val post = intent.getParcelableExtra<PostsDataItem>(EXTRA_POST)
         setPostData(post!!)
     }
@@ -26,6 +27,7 @@ class PostsDetailActivity : AppCompatActivity() {
     fun setPostData(post:PostsDataItem){
         detailActivityBinding.postDescBody.text = post.body
         setUserData(post)
+        setCommentsData(post)
     }
 
     fun setUserData(post:PostsDataItem){
@@ -36,6 +38,19 @@ class PostsDetailActivity : AppCompatActivity() {
                 detailActivityBinding.userMailBody.text = userList.email
                 detailActivityBinding.userPhoneBody.text = userList.phone
                 detailActivityBinding.userWebBody.text = userList.website
+            })
+    }
+
+    fun setCommentsData(post:PostsDataItem){
+        var commentsList = mutableListOf("")
+        commentsList.remove("")
+        commentsViewModel.getComments(post.id.toString())
+        commentsViewModel.commentsModel.observe(this,
+            {comments ->
+                comments.forEach {
+                    commentsList.add(it.body)
+                }
+                detailActivityBinding.rvCommentsList.adapter = CommentRecyclerAdapter(commentsList)
             })
     }
 
