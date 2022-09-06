@@ -10,6 +10,7 @@ class MainPagerAdapter (fragment: FragmentActivity) : FragmentStateAdapter(fragm
 
     companion object{
         private const val ARG_OBJECT: String = "object"
+        private const val ARG_PARAM1: String = "param1"
     }
     override fun getItemCount(): Int = 2
 
@@ -19,6 +20,7 @@ class MainPagerAdapter (fragment: FragmentActivity) : FragmentStateAdapter(fragm
         fragment.arguments = Bundle().apply {
             // Our object is just an integer :-P
             putInt(ARG_OBJECT, position + 1)
+            putString(ARG_PARAM1, position.toString())
         }
         return fragment
     }
