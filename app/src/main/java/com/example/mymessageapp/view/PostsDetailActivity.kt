@@ -48,7 +48,7 @@ class PostsDetailActivity : AppCompatActivity() {
         commentsViewModel.commentsModel.observe(this,
             {comments ->
                 comments.forEach {
-                    commentsList.add(it.body)
+                    commentsList.add( "\'" + it.body + "\'")
                 }
                 detailActivityBinding.rvCommentsList.adapter = CommentRecyclerAdapter(commentsList)
             })
