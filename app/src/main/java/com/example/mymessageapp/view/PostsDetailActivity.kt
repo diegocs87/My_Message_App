@@ -15,12 +15,16 @@ class PostsDetailActivity : AppCompatActivity() {
         detailActivityBinding = PostsDetailActivityBinding.inflate(layoutInflater)
         setContentView(detailActivityBinding.root)
         detailActivityBinding.rvCommentsList.adapter = CommentRecyclerAdapter(fillComments())
-        val post = intent.getParcelableExtra<MessageData>("data")
+        val post = intent.getParcelableExtra<MessageData>(EXTRA_POST)
         detailActivityBinding.postDescBody.text = post!!.description
         detailActivityBinding.userNameBody.text = post.user.name
         detailActivityBinding.userMailBody.text = post.user.email
         detailActivityBinding.userPhoneBody.text = post.user.phone
         detailActivityBinding.userWebBody.text = post.user.webSite
+    }
+
+    companion object {
+        var EXTRA_POST = "POST"
     }
 
     fun fillComments() : List<String>{

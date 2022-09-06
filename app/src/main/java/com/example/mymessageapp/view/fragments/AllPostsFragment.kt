@@ -6,11 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.example.mymessageapp.databinding.FragmentAllPostsBinding
 import com.example.mymessageapp.model.MessageData
 import com.example.mymessageapp.model.UserData
+import com.example.mymessageapp.model.PostsAPIBuilder
+import com.example.mymessageapp.model.data.PostsDataItem
+import com.example.mymessageapp.model.network.PostsService
 import com.example.mymessageapp.view.PostsDetailActivity
 import com.example.mymessageapp.view.adapters.AllPostsRecyclerAdapter
+import com.example.mymessageapp.viewmodel.PostsViewModel
+import kotlin.concurrent.thread
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +29,7 @@ class AllPostsFragment : Fragment() {
     private var param2: String? = null
 
     private var PostsFragmentbinding: FragmentAllPostsBinding? = null
+    private val postsViewModel: PostsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,26 +44,26 @@ class AllPostsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         PostsFragmentbinding = FragmentAllPostsBinding.inflate(inflater, container, false)
-        PostsFragmentbinding!!.allPostsRecyclerView.adapter = AllPostsRecyclerAdapter(fillRecyclerTest())
-        { post ->
-            onPostDetailActivity(post)
-        };
+        postsViewModel.getPosts()
+        onPostsViewModelObserver()
         // Inflate the layout for this fragment
         return PostsFragmentbinding!!.root
     }
 
+    private fun onPostsViewModelObserver(){
+        postsViewModel.postsModel.observe(this, Observer { postsList ->
+            PostsFragmentbinding!!.allPostsRecyclerView.adapter = AllPostsRecyclerAdapter(postsList)
+            { post ->
+                onPostDetailActivity(post)
+            }
+        })
+    }
+
+
     private fun fillRecyclerTest(): List<MessageData> {
-        var userList = fillUserDataTest()
         return listOf(
-            MessageData(
-                "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-                "hahahaha",
-                userList[0],
-                "yayayayuua"
-            ),
-            MessageData("qui est esse", "hohohoh", userList[1], "rkrkrkrk"),
-            MessageData("ea molestias quasi exercitationem repellat qui ipsa sit aut", "hahahaha", userList[2], "kakakaka"),
-            MessageData("eum et est occaecati", "gagagagag", userList[3], "hahahahahhaha")
+            MessageData("unt aut facere repellat provident occaecati excepturi optio reprehenderit",
+                "",fillUserDataTest()[0],"")
         )
     }
 
@@ -68,10 +76,10 @@ class AllPostsFragment : Fragment() {
         )
     }
 
-    private fun onPostDetailActivity (postData: MessageData){
-        val intent = Intent(context, PostsDetailActivity:: class.java)
-        intent.putExtra("data", postData)
-        startActivity(intent)
+    private fun onPostDetailActivity (postData: PostsDataItem){
+//        val intent = Intent(context, PostsDetailActivity:: class.java)
+//        intent.putExtra(PostsDetailActivity.EXTRA_POST, postData)
+//        startActivity(intent)
     }
 
     companion object {
