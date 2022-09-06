@@ -35,6 +35,7 @@ class AllPostsFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
+            println("param is:" + param1)
             param2 = it.getString(ARG_PARAM2)
         }
     }
@@ -44,8 +45,7 @@ class AllPostsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         PostsFragmentbinding = FragmentAllPostsBinding.inflate(inflater, container, false)
-        postsViewModel.getPosts()
-        onPostsViewModelObserver()
+        onFragmentsCreate()
         // Inflate the layout for this fragment
         return PostsFragmentbinding!!.root
     }
@@ -59,11 +59,27 @@ class AllPostsFragment : Fragment() {
         })
     }
 
+    private fun onFragmentsCreate(){
+      when (param1){
+          "0" -> {
+              postsViewModel.getPosts()
+              onPostsViewModelObserver()
+          }
 
-    private fun fillRecyclerTest(): List<MessageData> {
+          "1"  -> {
+              PostsFragmentbinding!!.allPostsRecyclerView.adapter =
+                  AllPostsRecyclerAdapter(fillRecyclerTest())
+                  { post ->
+                      onPostDetailActivity(post)
+                  }
+          }
+        }
+    }
+
+
+    private fun fillRecyclerTest(): List<PostsDataItem> {
         return listOf(
-            MessageData("unt aut facere repellat provident occaecati excepturi optio reprehenderit",
-                "",fillUserDataTest()[0],"")
+            PostsDataItem("body",1,"unt aut facere repellat provident occaecati excepturi optio reprehenderit",1)
         )
     }
 
