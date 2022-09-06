@@ -3,6 +3,7 @@ package com.example.mymessageapp.model.data.database.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.mymessageapp.model.data.PostsDataItem
 import com.example.mymessageapp.model.data.UsersDataItem
 
 @Entity(tableName = "favorites_table")
@@ -12,3 +13,5 @@ data class FavoritesEntity(
    @ColumnInfo (name = "tittle") val tittle : String,
 
  )
+
+fun PostsDataItem.toDataBaseData() = FavoritesEntity(id = id, tittle = title)

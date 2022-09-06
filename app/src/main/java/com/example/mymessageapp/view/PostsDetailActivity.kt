@@ -1,27 +1,48 @@
 package com.example.mymessageapp.view
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.mymessageapp.databinding.PostsDetailActivityBinding
 import com.example.mymessageapp.model.MessageData
+import com.example.mymessageapp.model.data.PostsDataItem
+import com.example.mymessageapp.model.data.database.PostsDataBase
+import com.example.mymessageapp.model.data.database.dao.FavoritesDao
+import com.example.mymessageapp.model.data.database.entities.FavoritesEntity
+import com.example.mymessageapp.model.data.database.entities.toDataBaseData
 import com.example.mymessageapp.view.adapters.CommentRecyclerAdapter
+import com.example.mymessageapp.viewmodel.FavoritePostsViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class PostsDetailActivity : AppCompatActivity() {
 
     private lateinit var detailActivityBinding : PostsDetailActivityBinding
+    private val favoritePostsViewModel: FavoritePostsViewModel by viewModels()
+    private lateinit var favoritesDao: FavoritesDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         detailActivityBinding = PostsDetailActivityBinding.inflate(layoutInflater)
         setContentView(detailActivityBinding.root)
         detailActivityBinding.rvCommentsList.adapter = CommentRecyclerAdapter(fillComments())
-        val post = intent.getParcelableExtra<MessageData>(EXTRA_POST)
-        detailActivityBinding.postDescBody.text = post!!.description
-        detailActivityBinding.userNameBody.text = post.user.name
-        detailActivityBinding.userMailBody.text = post.user.email
-        detailActivityBinding.userPhoneBody.text = post.user.phone
-        detailActivityBinding.userWebBody.text = post.user.webSite
+        val post = intent.getParcelableExtra<PostsDataItem>(EXTRA_POST)
+        detailActivityBinding.postDescBody.text = post!!.body
+        detailActivityBinding.userNameBody.text = post.id.toString()
+        detailActivityBinding.userMailBody.text = post.userId.toString()
+        favoritesDao = PostsDataBase.buildDatabase(application).favoritesDao()
+        detailActivityBinding.buttonFavorite.setOnClickListener {
+            addPostToFavorite(post.toDataBaseData(), application)}
     }
+
+    fun addPostToFavorite(postId: FavoritesEntity, context: Context){
+        favoritesDao.insertFavorite(postId)
+    }
+
 
     companion object {
         var EXTRA_POST = "POST"

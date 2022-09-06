@@ -93,9 +93,9 @@ class AllPostsFragment : Fragment() {
     }
 
     private fun onPostDetailActivity (postData: PostsDataItem){
-//        val intent = Intent(context, PostsDetailActivity:: class.java)
-//        intent.putExtra(PostsDetailActivity.EXTRA_POST, postData)
-//        startActivity(intent)
+        val intent = Intent(context, PostsDetailActivity:: class.java)
+        intent.putExtra(PostsDetailActivity.EXTRA_POST, postData)
+        startActivity(intent)
     }
 
     companion object {
