@@ -9,8 +9,11 @@ import android.view.ViewGroup
 import com.example.mymessageapp.databinding.FragmentAllPostsBinding
 import com.example.mymessageapp.model.MessageData
 import com.example.mymessageapp.model.UserData
+import com.example.mymessageapp.model.PostsAPIBuilder
+import com.example.mymessageapp.model.network.PostsService
 import com.example.mymessageapp.view.PostsDetailActivity
 import com.example.mymessageapp.view.adapters.AllPostsRecyclerAdapter
+import kotlin.concurrent.thread
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +25,7 @@ class AllPostsFragment : Fragment() {
     private var param2: String? = null
 
     private var PostsFragmentbinding: FragmentAllPostsBinding? = null
+    private val postsService = PostsService()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,26 +40,19 @@ class AllPostsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         PostsFragmentbinding = FragmentAllPostsBinding.inflate(inflater, container, false)
-        PostsFragmentbinding!!.allPostsRecyclerView.adapter = AllPostsRecyclerAdapter(fillRecyclerTest())
+        PostsFragmentbinding!!.allPostsRecyclerView.adapter = AllPostsRecyclerAdapter(postsService.getPosts())
         { post ->
             onPostDetailActivity(post)
-        };
+        }
         // Inflate the layout for this fragment
         return PostsFragmentbinding!!.root
     }
 
+
     private fun fillRecyclerTest(): List<MessageData> {
-        var userList = fillUserDataTest()
         return listOf(
-            MessageData(
-                "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-                "hahahaha",
-                userList[0],
-                "yayayayuua"
-            ),
-            MessageData("qui est esse", "hohohoh", userList[1], "rkrkrkrk"),
-            MessageData("ea molestias quasi exercitationem repellat qui ipsa sit aut", "hahahaha", userList[2], "kakakaka"),
-            MessageData("eum et est occaecati", "gagagagag", userList[3], "hahahahahhaha")
+            MessageData("unt aut facere repellat provident occaecati excepturi optio reprehenderit",
+                "",fillUserDataTest()[0],"")
         )
     }
 
