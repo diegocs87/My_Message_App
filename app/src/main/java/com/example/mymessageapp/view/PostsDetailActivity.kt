@@ -2,25 +2,41 @@ package com.example.mymessageapp.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.example.mymessageapp.databinding.PostsDetailActivityBinding
 import com.example.mymessageapp.model.MessageData
+import com.example.mymessageapp.model.data.PostsDataItem
 import com.example.mymessageapp.view.adapters.CommentRecyclerAdapter
+import com.example.mymessageapp.viewmodel.UsersViewModel
 
 class PostsDetailActivity : AppCompatActivity() {
 
     private lateinit var detailActivityBinding : PostsDetailActivityBinding
+    private val usersViewModel: UsersViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         detailActivityBinding = PostsDetailActivityBinding.inflate(layoutInflater)
         setContentView(detailActivityBinding.root)
         detailActivityBinding.rvCommentsList.adapter = CommentRecyclerAdapter(fillComments())
-        val post = intent.getParcelableExtra<MessageData>(EXTRA_POST)
-        detailActivityBinding.postDescBody.text = post!!.description
-        detailActivityBinding.userNameBody.text = post.user.name
-        detailActivityBinding.userMailBody.text = post.user.email
-        detailActivityBinding.userPhoneBody.text = post.user.phone
-        detailActivityBinding.userWebBody.text = post.user.webSite
+        val post = intent.getParcelableExtra<PostsDataItem>(EXTRA_POST)
+        setPostData(post!!)
+    }
+
+    fun setPostData(post:PostsDataItem){
+        detailActivityBinding.postDescBody.text = post.body
+        setUserData(post)
+    }
+
+    fun setUserData(post:PostsDataItem){
+        usersViewModel.getUser(post.userId.toString())
+        usersViewModel.usersModel.observe(this,
+            {userList ->
+                detailActivityBinding.userNameBody.text = userList.name
+                detailActivityBinding.userMailBody.text = userList.email
+                detailActivityBinding.userPhoneBody.text = userList.phone
+                detailActivityBinding.userWebBody.text = userList.website
+            })
     }
 
     companion object {
