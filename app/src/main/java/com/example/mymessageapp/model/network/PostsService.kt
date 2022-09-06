@@ -9,7 +9,7 @@ class PostsService {
     suspend fun getPosts(): List<PostsDataItem> {
         return withContext(Dispatchers.IO){
             val response = PostsAPIBuilder.service.getAllPosts()
-            val body = response.execute().body()
+            val body = response.body()
             body ?: emptyList()
         }
     }
