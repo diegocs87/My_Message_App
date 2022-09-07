@@ -1,62 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<?xml version = "1.0" encoding = "utf-8"?>
+<layout xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
+    xmlns:card_view = "http://schemas.android.com/apk/res-auto"
     >
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width  = "match_parent"
+        android:layout_height = "match_parent">
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/parent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/general_background">
+            android:id = "@+id/parent"
+            android:layout_width = "match_parent"
+            android:layout_height = "match_parent"
+            android:background = "@color/general_background">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:orientation = "vertical">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="8dp"
-                    card_view:cardCornerRadius="10dp"
-                    card_view:cardElevation="5dp"
-                    card_view:cardUseCompatPadding="true"
-                    app:cardBackgroundColor= "@color/lightGray">
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_marginStart = "8dp"
+                    android:layout_marginTop = "4dp"
+                    android:layout_marginEnd = "8dp"
+                    card_view:cardCornerRadius = "10dp"
+                    card_view:cardElevation = "5dp"
+                    card_view:cardUseCompatPadding = "true"
+                    app:cardBackgroundColor =  "@color/lightGray">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:orientation="vertical">
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:layout_margin = "8dp"
+                        android:orientation = "vertical">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_width = "match_parent"
+                            android:layout_height = "wrap_content">
 
                             <TextView
-                                android:id="@+id/tagDescTittle"
-                                style="@style/TagDescriptionTittle"
-                                android:gravity="center"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:text= "@string/descriptionTittle" />
+                                android:id = "@+id/tagDescTittle"
+                                style = "@style/TagDescriptionTittle"
+                                android:gravity = "center"
+                                app:layout_constraintEnd_toEndOf = "parent"
+                                app:layout_constraintStart_toStartOf = "parent"
+                                app:layout_constraintTop_toTopOf = "parent"
+                                android:text =  "@string/descriptionTittle" />
 
                             <TextView
-                                android:id="@+id/postDescBody"
-                                style="@style/TagsDetailSectionBody"
-                                app:layout_constraintStart_toStartOf ="parent"
-                                app:layout_constraintEnd_toEndOf ="parent"
-                                android:layout_gravity="center_horizontal"
-                                app:layout_constraintTop_toBottomOf="@id/tagDescTittle"
-                                android:text="quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"/>
+                                android:id = "@+id/postDescBody"
+                                style = "@style/TagsDetailSectionBody"
+                                app:layout_constraintStart_toStartOf  = "parent"
+                                app:layout_constraintEnd_toEndOf  = "parent"
+                                android:layout_gravity = "center_horizontal"
+                                app:layout_constraintTop_toBottomOf = "@id/tagDescTittle"
+                                android:text = "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"/>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -65,106 +65,106 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="8dp"
-                    card_view:cardCornerRadius="10dp"
-                    card_view:cardElevation="5dp"
-                    card_view:cardUseCompatPadding="true"
-                    app:cardBackgroundColor= "@color/lightGray">
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_marginStart = "8dp"
+                    android:layout_marginTop = "4dp"
+                    android:layout_marginEnd = "8dp"
+                    card_view:cardCornerRadius = "10dp"
+                    card_view:cardElevation = "5dp"
+                    card_view:cardUseCompatPadding = "true"
+                    app:cardBackgroundColor =  "@color/lightGray">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:orientation="vertical">
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:layout_margin = "8dp"
+                        android:orientation = "vertical">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_width = "match_parent"
+                            android:layout_height = "wrap_content">
 
                             <TextView
-                                android:id="@+id/tagUserTittleTV"
-                                style="@style/TagDescriptionTittle"
-                                android:gravity="center"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:text="@string/userTittle" />
+                                android:id = "@+id/tagUserTittleTV"
+                                style = "@style/TagDescriptionTittle"
+                                android:gravity = "center"
+                                app:layout_constraintEnd_toEndOf = "parent"
+                                app:layout_constraintStart_toStartOf = "parent"
+                                app:layout_constraintTop_toTopOf = "parent"
+                                android:text = "@string/userTittle" />
 
                             <TextView
-                                android:id="@+id/userNameTittle"
-                                style="@style/TagUserTittle"
-                                app:layout_constraintStart_toStartOf ="parent"
-                                app:layout_constraintEnd_toEndOf ="parent"
-                                android:layout_gravity="center_horizontal"
-                                app:layout_constraintTop_toBottomOf="@id/tagUserTittleTV"
-                                android:text="@string/nameTittle"/>
+                                android:id = "@+id/userNameTittle"
+                                style = "@style/TagUserTittle"
+                                app:layout_constraintStart_toStartOf  = "parent"
+                                app:layout_constraintEnd_toEndOf  = "parent"
+                                android:layout_gravity = "center_horizontal"
+                                app:layout_constraintTop_toBottomOf = "@id/tagUserTittleTV"
+                                android:text = "@string/nameTittle"/>
 
                             <TextView
-                                android:id="@+id/userNameBody"
-                                style="@style/TagsDetailSectionBody"
-                                app:layout_constraintStart_toStartOf ="parent"
-                                app:layout_constraintEnd_toEndOf ="parent"
-                                android:layout_gravity="center_horizontal"
-                                app:layout_constraintTop_toBottomOf="@id/userNameTittle"
-                                android:text="@string/nameTittle"/>
+                                android:id = "@+id/userNameBody"
+                                style = "@style/TagsDetailSectionBody"
+                                app:layout_constraintStart_toStartOf  = "parent"
+                                app:layout_constraintEnd_toEndOf  = "parent"
+                                android:layout_gravity = "center_horizontal"
+                                app:layout_constraintTop_toBottomOf = "@id/userNameTittle"
+                                android:text = "@string/nameTittle"/>
 
                             <TextView
-                                android:id="@+id/userMailTittle"
-                                style="@style/TagUserTittle"
-                                app:layout_constraintStart_toStartOf ="parent"
-                                app:layout_constraintEnd_toEndOf ="parent"
-                                android:layout_gravity="center_horizontal"
-                                app:layout_constraintTop_toBottomOf="@id/userNameBody"
-                                android:text="@string/mailTittle"/>
+                                android:id = "@+id/userMailTittle"
+                                style = "@style/TagUserTittle"
+                                app:layout_constraintStart_toStartOf  = "parent"
+                                app:layout_constraintEnd_toEndOf  = "parent"
+                                android:layout_gravity = "center_horizontal"
+                                app:layout_constraintTop_toBottomOf = "@id/userNameBody"
+                                android:text = "@string/mailTittle"/>
 
                             <TextView
-                                android:id="@+id/userMailBody"
-                                style="@style/TagsDetailSectionBody"
-                                app:layout_constraintStart_toStartOf ="parent"
-                                app:layout_constraintEnd_toEndOf ="parent"
-                                android:layout_gravity="center_horizontal"
-                                app:layout_constraintTop_toBottomOf="@id/userMailTittle"
-                                android:text="@string/mailTittle"/>
+                                android:id = "@+id/userMailBody"
+                                style = "@style/TagsDetailSectionBody"
+                                app:layout_constraintStart_toStartOf  = "parent"
+                                app:layout_constraintEnd_toEndOf  = "parent"
+                                android:layout_gravity = "center_horizontal"
+                                app:layout_constraintTop_toBottomOf = "@id/userMailTittle"
+                                android:text = "@string/mailTittle"/>
 
                             <TextView
-                                android:id="@+id/userPhoneTittle"
-                                style="@style/TagUserTittle"
-                                app:layout_constraintStart_toStartOf ="parent"
-                                app:layout_constraintEnd_toEndOf ="parent"
-                                android:layout_gravity="center_horizontal"
-                                app:layout_constraintTop_toBottomOf="@id/userMailBody"
-                                android:text="@string/phoneTittle"/>
+                                android:id = "@+id/userPhoneTittle"
+                                style = "@style/TagUserTittle"
+                                app:layout_constraintStart_toStartOf  = "parent"
+                                app:layout_constraintEnd_toEndOf  = "parent"
+                                android:layout_gravity = "center_horizontal"
+                                app:layout_constraintTop_toBottomOf = "@id/userMailBody"
+                                android:text = "@string/phoneTittle"/>
 
                             <TextView
-                                android:id="@+id/userPhoneBody"
-                                style="@style/TagsDetailSectionBody"
-                                app:layout_constraintStart_toStartOf ="parent"
-                                app:layout_constraintEnd_toEndOf ="parent"
-                                android:layout_gravity="center_horizontal"
-                                app:layout_constraintTop_toBottomOf="@id/userPhoneTittle"
-                                android:text="@string/phoneTittle"/>
+                                android:id = "@+id/userPhoneBody"
+                                style = "@style/TagsDetailSectionBody"
+                                app:layout_constraintStart_toStartOf  = "parent"
+                                app:layout_constraintEnd_toEndOf  = "parent"
+                                android:layout_gravity = "center_horizontal"
+                                app:layout_constraintTop_toBottomOf = "@id/userPhoneTittle"
+                                android:text = "@string/phoneTittle"/>
 
                             <TextView
-                                android:id="@+id/userWebTittle"
-                                style="@style/TagUserTittle"
-                                app:layout_constraintStart_toStartOf ="parent"
-                                app:layout_constraintEnd_toEndOf ="parent"
-                                android:layout_gravity="center_horizontal"
-                                app:layout_constraintTop_toBottomOf="@id/userPhoneBody"
-                                android:text="@string/webTittle"/>
+                                android:id = "@+id/userWebTittle"
+                                style = "@style/TagUserTittle"
+                                app:layout_constraintStart_toStartOf  = "parent"
+                                app:layout_constraintEnd_toEndOf  = "parent"
+                                android:layout_gravity = "center_horizontal"
+                                app:layout_constraintTop_toBottomOf = "@id/userPhoneBody"
+                                android:text = "@string/webTittle"/>
 
                             <TextView
-                                android:id="@+id/userWebBody"
-                                style="@style/TagsDetailSectionBody"
-                                app:layout_constraintStart_toStartOf ="parent"
-                                app:layout_constraintEnd_toEndOf ="parent"
-                                android:layout_gravity="center_horizontal"
-                                app:layout_constraintTop_toBottomOf="@id/userWebTittle"
-                                android:text="@string/webTittle"/>
+                                android:id = "@+id/userWebBody"
+                                style = "@style/TagsDetailSectionBody"
+                                app:layout_constraintStart_toStartOf  = "parent"
+                                app:layout_constraintEnd_toEndOf  = "parent"
+                                android:layout_gravity = "center_horizontal"
+                                app:layout_constraintTop_toBottomOf = "@id/userWebTittle"
+                                android:text = "@string/webTittle"/>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -173,42 +173,42 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="8dp"
-                    card_view:cardCornerRadius="10dp"
-                    card_view:cardElevation="5dp"
-                    card_view:cardUseCompatPadding="true"
-                    app:cardBackgroundColor= "@color/lightGray">
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_marginStart = "8dp"
+                    android:layout_marginTop = "4dp"
+                    android:layout_marginEnd = "8dp"
+                    card_view:cardCornerRadius = "10dp"
+                    card_view:cardElevation = "5dp"
+                    card_view:cardUseCompatPadding = "true"
+                    app:cardBackgroundColor =  "@color/lightGray">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:orientation="vertical">
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:layout_margin = "8dp"
+                        android:orientation = "vertical">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_width = "match_parent"
+                            android:layout_height = "wrap_content">
 
                             <TextView
-                                android:id="@+id/tagCommentsTittle"
-                                style="@style/TagDescriptionTittle"
-                                android:gravity="center"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:text= "@string/commentsTittle" />
+                                android:id = "@+id/tagCommentsTittle"
+                                style = "@style/TagDescriptionTittle"
+                                android:gravity = "center"
+                                app:layout_constraintEnd_toEndOf = "parent"
+                                app:layout_constraintStart_toStartOf = "parent"
+                                app:layout_constraintTop_toTopOf = "parent"
+                                android:text =  "@string/commentsTittle" />
 
                             <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/rvCommentsList"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                app:layout_constraintTop_toBottomOf = "@id/tagCommentsTittle"
-                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                android:id = "@+id/rvCommentsList"
+                                android:layout_width = "match_parent"
+                                android:layout_height = "wrap_content"
+                                android:orientation = "vertical"
+                                app:layout_constraintTop_toBottomOf  =  "@id/tagCommentsTittle"
+                                app:layoutManager = "androidx.recyclerview.widget.LinearLayoutManager"
                                  />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -222,15 +222,15 @@
         </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/characterFavorite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:src="@drawable/ic_fav_border"
-            app:backgroundTint="@color/teal_700"
-            app:layout_anchor="@id/parent"
-            app:layout_anchorGravity="bottom|end"
-            app:tint="@android:color/white" />
+            android:id = "@+id/characterFavorite"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_margin = "16dp"
+            android:src = "@drawable/ic_fav_border"
+            app:backgroundTint = "@color/teal_700"
+            app:layout_anchor = "@id/parent"
+            app:layout_anchorGravity = "bottom|end"
+            app:tint = "@android:color/white" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
