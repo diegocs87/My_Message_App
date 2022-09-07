@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.transition.Visibility
 import com.example.mymessageapp.databinding.FragmentAllPostsBinding
 import com.example.mymessageapp.model.MessageData
 import com.example.mymessageapp.model.UserData
@@ -65,6 +67,8 @@ class AllPostsFragment : Fragment() {
                   { post ->
                       onPostDetailActivity(post)
                   }
+              PostsFragmentbinding!!.deleteallbutton.isVisible = false
+              PostsFragmentbinding!!.updateAllButton.isVisible = false
           }
       }
     }
