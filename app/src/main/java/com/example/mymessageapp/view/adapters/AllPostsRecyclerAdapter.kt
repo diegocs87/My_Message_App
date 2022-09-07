@@ -1,7 +1,9 @@
 package com.example.mymessageapp.view.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymessageapp.databinding.AllMessagesRecyclerItemBinding
 import com.example.mymessageapp.model.MessageData
@@ -13,9 +15,7 @@ class AllPostsRecyclerAdapter (private val posts: List<PostsDataItem>, private v
     lateinit var postCardViewItemBinding:AllMessagesRecyclerItemBinding
 
     override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): MessageHolder {
+        parent: ViewGroup, viewType: Int): MessageHolder {
         postCardViewItemBinding = AllMessagesRecyclerItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent, false);
