@@ -46,17 +46,9 @@ class AllPostsFragment : Fragment() {
     ): View {
         PostsFragmentbinding = FragmentAllPostsBinding.inflate(inflater, container, false)
         onFragmentsCreate()
+        onDeleteAllButtonClickListener()
         // Inflate the layout for this fragment
         return PostsFragmentbinding!!.root
-    }
-
-    private fun onPostsViewModelObserver(){
-        postsViewModel.postsModel.observe(this, Observer { postsList ->
-            PostsFragmentbinding!!.allPostsRecyclerView.adapter = AllPostsRecyclerAdapter(postsList)
-            { post ->
-                onPostDetailActivity(post)
-            }
-        })
     }
 
     private fun onFragmentsCreate(){
@@ -76,6 +68,23 @@ class AllPostsFragment : Fragment() {
         }
     }
 
+    private fun onPostsViewModelObserver(){
+        postsViewModel.postsModel.observe(this, Observer { postsList ->
+            PostsFragmentbinding!!.allPostsRecyclerView.adapter = AllPostsRecyclerAdapter(postsList)
+            { post ->
+                onPostDetailActivity(post)
+            }
+        })
+    }
+
+    private fun onDeleteAllButtonClickListener(){
+        PostsFragmentbinding!!.deleteallbutton.setOnClickListener{ view ->
+            PostsFragmentbinding!!.allPostsRecyclerView.adapter = AllPostsRecyclerAdapter(emptyList()){ post ->
+                onPostDetailActivity(post)
+            }
+        }
+    }
+
 
     private fun fillRecyclerTest(): List<PostsDataItem> {
         return listOf(
@@ -83,14 +92,6 @@ class AllPostsFragment : Fragment() {
         )
     }
 
-    private fun fillUserDataTest(): List<UserData> {
-        return listOf(
-            UserData("juan", "juan@gmail.com", "312456", "ww.juan.com"),
-            UserData("daniel", "daniel@gmail.com", "311438", "ww.daniel.com"),
-            UserData("felipe", "felipe@gmail.com", "316789", "ww.felipe.com"),
-            UserData("camilo", "camilo@gmail.com", "3167345", "ww.camilo.com")
-        )
-    }
 
     private fun onPostDetailActivity (postData: PostsDataItem){
         val intent = Intent(context, PostsDetailActivity:: class.java)
