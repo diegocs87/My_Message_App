@@ -1,8 +1,6 @@
 package com.example.mymessageapp.viewmodel
 
-import android.app.Application
 import android.content.Context
-import android.content.Entity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,8 +11,9 @@ import com.example.mymessageapp.model.data.database.entities.FavoritesEntity
 import com.example.mymessageapp.model.data.database.entities.toPostsData
 import kotlinx.coroutines.launch
 
-class AddFavoriteViewModel(): ViewModel() {
+class ChangeFavoriteStateViewModel(): ViewModel() {
     val isFavoriteModel = MutableLiveData<Boolean>()
+    val favoritesList = MutableLiveData<List<PostsDataItem>>()
 
     fun getFavoriteState(favPost: FavoritesEntity, context: Context){
         val favoritesDao = PostsDataBase.buildDatabase(context).favoritesDao()
@@ -28,6 +27,18 @@ class AddFavoriteViewModel(): ViewModel() {
         viewModelScope.launch {
             setFavoriteState(favoritesDao, favPost)
         }
+    }
+
+    fun getAllFavorites(context: Context){
+        val favoritesDao = PostsDataBase.buildDatabase(context).favoritesDao()
+        viewModelScope.launch {
+            getAllFavoritesList(favoritesDao)
+        }
+    }
+
+    suspend fun getAllFavoritesList(favoritesDao: FavoritesDao){
+        var favoriteListEntity = favoritesDao.getAllFavorites()
+        favoritesList.postValue(favoriteListEntity.map { it.toPostsData()})
     }
 
     suspend fun getFavoriteState(favoritesDao: FavoritesDao, favPost: FavoritesEntity){
