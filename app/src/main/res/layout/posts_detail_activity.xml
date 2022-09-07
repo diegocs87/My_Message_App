@@ -19,8 +19,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Character Detail Section -->
-
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -204,19 +202,12 @@
                                 app:layout_constraintTop_toTopOf="parent"
                                 android:text= "@string/commentsTittle" />
 
-                            <ProgressBar
-                                android:id="@+id/commentsProgressBar"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintTop_toBottomOf ="@id/tagCommentsTittle"
-                                android:layout_gravity="center" />
-
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/rvCommentsList"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                app:layout_constraintTop_toBottomOf = "@id/commentsProgressBar"
+                                app:layout_constraintTop_toBottomOf = "@id/tagCommentsTittle"
                                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                                  />
 
