@@ -47,7 +47,7 @@ class AllPostsFragment : Fragment() {
     ): View {
         PostsFragmentbinding = FragmentAllPostsBinding.inflate(inflater, container, false)
         onFragmentsCreate()
-        onDeleteAllButtonClickListener()
+        setListeners()
         // Inflate the layout for this fragment
         return PostsFragmentbinding!!.root
     }
@@ -66,7 +66,7 @@ class AllPostsFragment : Fragment() {
                       onPostDetailActivity(post)
                   }
           }
-        }
+      }
     }
 
     private fun onPostsViewModelObserver(){
@@ -76,6 +76,18 @@ class AllPostsFragment : Fragment() {
                 onPostDetailActivity(post)
             }
         })
+    }
+
+    private fun setListeners(){
+        onDeleteAllButtonClickListener()
+        onLoadAllPostsButtonClickListener()
+    }
+
+    private fun onLoadAllPostsButtonClickListener(){
+        PostsFragmentbinding!!.updateAllButton.setOnClickListener { view ->
+            postsViewModel.getPosts()
+            onPostsViewModelObserver()
+        }
     }
 
     private fun onDeleteAllButtonClickListener(){
@@ -99,7 +111,7 @@ class AllPostsFragment : Fragment() {
         intent.putExtra(PostsDetailActivity.EXTRA_POST, postData)
         startActivity(intent)
     }
-    
+
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
