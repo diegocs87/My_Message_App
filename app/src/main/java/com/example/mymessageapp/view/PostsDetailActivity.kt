@@ -3,6 +3,7 @@ package com.example.mymessageapp.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import com.example.mymessageapp.R
 import com.example.mymessageapp.databinding.PostsDetailActivityBinding
 import com.example.mymessageapp.model.MessageData
 import com.example.mymessageapp.model.data.PostsDataItem
@@ -26,10 +27,22 @@ class PostsDetailActivity : AppCompatActivity() {
         detailActivityBinding = PostsDetailActivityBinding.inflate(layoutInflater)
         setContentView(detailActivityBinding.root)
         val post = intent.getParcelableExtra<PostsDataItem>(EXTRA_POST)
-        setPostData(post!!)
-        detailActivityBinding.characterFavorite.setOnClickListener {
-            favoritesViewModel.getFavorite(post.toDataBaseData(), application)
+        onFavButtonClickListener(post!!)
+        setPostData(post)
+        getFavoriteState(post)
+
+    }
+
+    fun onFavButtonClickListener(post: PostsDataItem){
+        detailActivityBinding.postFavorite.setOnClickListener {
+            favoritesViewModel.setFavoriteState(post.toDataBaseData(), application)
         }
+    }
+    fun getFavoriteState(post:PostsDataItem){
+        favoritesViewModel.getFavoriteState(post.toDataBaseData(), application)
+        favoritesViewModel.isFavoriteModel.observe(this, {isFav ->
+            onFavButtonResState(isFav)
+        })
     }
 
     fun setPostData(post:PostsDataItem){
@@ -60,6 +73,14 @@ class PostsDetailActivity : AppCompatActivity() {
                 }
                 detailActivityBinding.rvCommentsList.adapter = CommentRecyclerAdapter(commentsList)
             })
+    }
+
+    fun onFavButtonResState(isFavorite: Boolean){
+        if(isFavorite) {
+            detailActivityBinding.postFavorite.setImageResource(R.drawable.ic_fav_indicator_item)
+        }else{
+            detailActivityBinding.postFavorite.setImageResource(R.drawable.ic_fav_border)
+        }
     }
 
     companion object {
