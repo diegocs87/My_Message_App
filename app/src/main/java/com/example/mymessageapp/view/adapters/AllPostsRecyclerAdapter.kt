@@ -1,13 +1,14 @@
 package com.example.mymessageapp.view.adapters
 
-import android.content.Context
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymessageapp.databinding.AllMessagesRecyclerItemBinding
-import com.example.mymessageapp.model.MessageData
 import com.example.mymessageapp.model.data.PostsDataItem
+import com.example.mymessageapp.viewmodel.ChangeFavoriteStateViewModel
 
 class AllPostsRecyclerAdapter (private val posts: List<PostsDataItem>, private val postsItemClickedListener:
     (PostsDataItem) -> Unit) : RecyclerView.Adapter<AllPostsRecyclerAdapter.MessageHolder>() {
@@ -25,6 +26,7 @@ class AllPostsRecyclerAdapter (private val posts: List<PostsDataItem>, private v
     override fun onBindViewHolder(holder: MessageHolder, position: Int) {
         val postId = posts[position]
         holder.setPostTittle(postId)
+        //holder.setFavIndicator(parent.con)
         holder.itemView.setOnClickListener {postsItemClickedListener(postId)}
     }
 
@@ -36,6 +38,10 @@ class AllPostsRecyclerAdapter (private val posts: List<PostsDataItem>, private v
             fun setPostTittle(postId: PostsDataItem){
                 cardViewBinding.postTittle.text = postId.title
             }
+
+        fun setFavIndicator(isVisible: Boolean){
+            cardViewBinding.favImgView.isVisible = isVisible
+        }
     }
 
 }

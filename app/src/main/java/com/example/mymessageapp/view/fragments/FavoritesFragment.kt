@@ -44,13 +44,13 @@ class FavoritesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        onFragmentsCreate()
         favoritesFragmentbinding = FragmentFavoritesBinding.inflate(inflater, container, false)
         return favoritesFragmentbinding!!.root
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
+    override fun onStart() {
+        super.onStart()
+        onFragmentsCreate()
     }
 
     private fun onFragmentsCreate(){
@@ -61,8 +61,6 @@ class FavoritesFragment : Fragment() {
     private fun onFavoritesListObserver(){
         favoritesViewModel.favoritesList.observe(this,
             {favList ->
-                favList.forEach {
-                }
                 favoritesFragmentbinding!!.favPostsRecyclerView.adapter =
                     FavoritesPostsRecyclerAdapter(favList)
                     { post ->

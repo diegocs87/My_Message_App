@@ -54,12 +54,19 @@ class AllPostsFragment : Fragment() {
         PostsFragmentbinding = FragmentAllPostsBinding.inflate(inflater, container, false)
         onFragmentsCreate()
         setListeners()
-//        favoritesViewModel.isFavoriteModel.observe(this, {
-//                isFav -> PostsFragmentbinding.favImgView
-//
-//        })
+        println("on create")
         // Inflate the layout for this fragment
         return PostsFragmentbinding!!.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        println("on start")
+    }
+
+    override fun onAttach(context: Context) {
+        println("on Attach")
+        super.onAttach(context)
     }
 
     private fun onFragmentsCreate(){
