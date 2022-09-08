@@ -13,5 +13,6 @@ data class PostsDataItem(
     @SerializedName("title")
     val title: String,
     @SerializedName("userId")
-    val userId: Int
+    val userId: Int,
+    var isFav: Boolean = false
 ): Parcelable

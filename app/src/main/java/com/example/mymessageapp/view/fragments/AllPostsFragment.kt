@@ -1,5 +1,6 @@
 package com.example.mymessageapp.view.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -15,10 +18,15 @@ import com.example.mymessageapp.databinding.FragmentAllPostsBinding
 import com.example.mymessageapp.model.MessageData
 import com.example.mymessageapp.model.UserData
 import com.example.mymessageapp.model.PostsAPIBuilder
+import com.example.mymessageapp.model.data.CommentsDataItem
 import com.example.mymessageapp.model.data.PostsDataItem
+import com.example.mymessageapp.model.data.UserDataItem
+import com.example.mymessageapp.model.data.database.entities.toDataBaseData
 import com.example.mymessageapp.model.network.PostsService
 import com.example.mymessageapp.view.PostsDetailActivity
 import com.example.mymessageapp.view.adapters.AllPostsRecyclerAdapter
+import com.example.mymessageapp.view.adapters.FavoritesPostsRecyclerAdapter
+import com.example.mymessageapp.viewmodel.ChangeFavoriteStateViewModel
 import com.example.mymessageapp.viewmodel.PostsViewModel
 import kotlin.concurrent.thread
 
@@ -33,12 +41,12 @@ class AllPostsFragment : Fragment() {
 
     private var PostsFragmentbinding: FragmentAllPostsBinding? = null
     private val postsViewModel: PostsViewModel by viewModels()
+    private val favoritesViewModel: ChangeFavoriteStateViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            println("param is:" + param1)
+            param1 = it.getString("message")
             param2 = it.getString(ARG_PARAM2)
         }
     }
@@ -48,29 +56,21 @@ class AllPostsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         PostsFragmentbinding = FragmentAllPostsBinding.inflate(inflater, container, false)
+        PostsFragmentbinding!!.progressBar.isVisible = true
+        // Inflate the layout for this fragment
         onFragmentsCreate()
         setListeners()
-        // Inflate the layout for this fragment
         return PostsFragmentbinding!!.root
     }
 
-    private fun onFragmentsCreate(){
-      when (param1){
-          "0" -> {
-              postsViewModel.getPosts()
-              onPostsViewModelObserver()
-          }
+    override fun onStart() {
+        super.onStart()
+    }
 
-          "1"  -> {
-              PostsFragmentbinding!!.allPostsRecyclerView.adapter =
-                  AllPostsRecyclerAdapter(fillRecyclerTest())
-                  { post ->
-                      onPostDetailActivity(post)
-                  }
-              PostsFragmentbinding!!.deleteallbutton.isVisible = false
-              PostsFragmentbinding!!.updateAllButton.isVisible = false
-          }
-      }
+
+    private fun onFragmentsCreate(){
+        postsViewModel.getPosts()
+        onPostsViewModelObserver()
     }
 
     private fun onPostsViewModelObserver(){
@@ -79,6 +79,7 @@ class AllPostsFragment : Fragment() {
             { post ->
                 onPostDetailActivity(post)
             }
+            PostsFragmentbinding!!.progressBar.isVisible = false
         })
     }
 
@@ -101,14 +102,6 @@ class AllPostsFragment : Fragment() {
             }
         }
     }
-
-
-    private fun fillRecyclerTest(): List<PostsDataItem> {
-        return listOf(
-            PostsDataItem("body",1,"unt aut facere repellat provident occaecati excepturi optio reprehenderit",1)
-        )
-    }
-
 
     private fun onPostDetailActivity (postData: PostsDataItem){
         val intent = Intent(context, PostsDetailActivity:: class.java)
