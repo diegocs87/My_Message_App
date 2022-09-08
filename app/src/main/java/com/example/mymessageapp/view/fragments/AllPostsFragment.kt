@@ -54,6 +54,7 @@ class AllPostsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         PostsFragmentbinding = FragmentAllPostsBinding.inflate(inflater, container, false)
+        PostsFragmentbinding!!.progressBar.isVisible = true
         onFragmentsCreate()
         setListeners()
         // Inflate the layout for this fragment
@@ -75,6 +76,7 @@ class AllPostsFragment : Fragment() {
 
     private fun onPostsViewModelObserver(){
         postsViewModel.postsModel.observe(this, Observer { postsList ->
+            PostsFragmentbinding!!.progressBar.isVisible = false
             PostsFragmentbinding!!.allPostsRecyclerView.adapter = AllPostsRecyclerAdapter(postsList)
             { post ->
                 onPostDetailActivity(post)
