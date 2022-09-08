@@ -27,7 +27,6 @@ class AllPostsRecyclerAdapter (private val posts: List<PostsDataItem>, private v
         holder.setPostTittle(postId)
         holder.setFavIndicator(postId.isFav)
         holder.itemView.setOnClickListener {postsItemClickedListener(postId)}
-        holder.jjj()
     }
 
     override fun getItemCount(): Int = posts.size
@@ -35,9 +34,6 @@ class AllPostsRecyclerAdapter (private val posts: List<PostsDataItem>, private v
     class MessageHolder(private val cardViewBinding: AllMessagesRecyclerItemBinding):
         RecyclerView.ViewHolder(cardViewBinding.root) {
 
-            fun jjj (){
-                cardViewBinding.deleteImgView.setOnClickListener {  }
-            }
 
             fun setPostTittle(postId: PostsDataItem){
                 cardViewBinding.postTittle.text = postId.title
