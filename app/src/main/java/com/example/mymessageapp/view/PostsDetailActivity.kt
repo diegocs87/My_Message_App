@@ -1,8 +1,9 @@
 package com.example.mymessageapp.view
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.mymessageapp.R
 import com.example.mymessageapp.databinding.PostsDetailActivityBinding
@@ -12,6 +13,7 @@ import com.example.mymessageapp.view.adapters.CommentRecyclerAdapter
 import com.example.mymessageapp.viewmodel.ChangeFavoriteStateViewModel
 import com.example.mymessageapp.viewmodel.CommentsViewModel
 import com.example.mymessageapp.viewmodel.UsersViewModel
+
 
 class PostsDetailActivity : AppCompatActivity() {
 

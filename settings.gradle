@@ -1,2 +1,3 @@
 rootProject.name = "MyMessageApp"
 include ':app'
+

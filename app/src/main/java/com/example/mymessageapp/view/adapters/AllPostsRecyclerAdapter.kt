@@ -2,13 +2,12 @@ package com.example.mymessageapp.view.adapters
 
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymessageapp.databinding.AllMessagesRecyclerItemBinding
 import com.example.mymessageapp.model.data.PostsDataItem
-import com.example.mymessageapp.viewmodel.ChangeFavoriteStateViewModel
 
 class AllPostsRecyclerAdapter (private val posts: List<PostsDataItem>, private val postsItemClickedListener:
     (PostsDataItem) -> Unit) : RecyclerView.Adapter<AllPostsRecyclerAdapter.MessageHolder>() {
@@ -26,8 +25,9 @@ class AllPostsRecyclerAdapter (private val posts: List<PostsDataItem>, private v
     override fun onBindViewHolder(holder: MessageHolder, position: Int) {
         val postId = posts[position]
         holder.setPostTittle(postId)
-        //holder.setFavIndicator(parent.con)
+        holder.setFavIndicator(postId.isFav)
         holder.itemView.setOnClickListener {postsItemClickedListener(postId)}
+        holder.jjj()
     }
 
     override fun getItemCount(): Int = posts.size
@@ -35,13 +35,18 @@ class AllPostsRecyclerAdapter (private val posts: List<PostsDataItem>, private v
     class MessageHolder(private val cardViewBinding: AllMessagesRecyclerItemBinding):
         RecyclerView.ViewHolder(cardViewBinding.root) {
 
+            fun jjj (){
+                cardViewBinding.deleteImgView.setOnClickListener {  }
+            }
+
             fun setPostTittle(postId: PostsDataItem){
                 cardViewBinding.postTittle.text = postId.title
             }
 
-        fun setFavIndicator(isVisible: Boolean){
-            cardViewBinding.favImgView.isVisible = isVisible
-        }
+            fun setFavIndicator(isVisible: Boolean){
+                cardViewBinding.favImgView.isVisible = isVisible
+            }
+
     }
 
 }
