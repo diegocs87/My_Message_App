@@ -34,4 +34,4 @@ In this project the following Technologies/Frameworks were implemented:
 * **Tab Layout**
 * **View Pager**
 * **Live Data**
-* **Dagger 2**
+* **Dagger hilt**
