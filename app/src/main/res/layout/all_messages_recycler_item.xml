@@ -23,8 +23,8 @@
 
             <ImageView
                 android:id="@+id/favImgView"
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 card_view:srcCompat="@drawable/ic_fav_indicator_item" />
 
             <TextView

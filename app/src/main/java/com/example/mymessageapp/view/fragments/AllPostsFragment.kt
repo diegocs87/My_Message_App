@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -17,6 +18,7 @@ import com.example.mymessageapp.databinding.FragmentAllPostsBinding
 import com.example.mymessageapp.model.MessageData
 import com.example.mymessageapp.model.UserData
 import com.example.mymessageapp.model.PostsAPIBuilder
+import com.example.mymessageapp.model.data.CommentsDataItem
 import com.example.mymessageapp.model.data.PostsDataItem
 import com.example.mymessageapp.model.data.UserDataItem
 import com.example.mymessageapp.model.data.database.entities.toDataBaseData
@@ -44,7 +46,7 @@ class AllPostsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
+            param1 = it.getString("message")
             param2 = it.getString(ARG_PARAM2)
         }
     }
@@ -55,9 +57,9 @@ class AllPostsFragment : Fragment() {
     ): View {
         PostsFragmentbinding = FragmentAllPostsBinding.inflate(inflater, container, false)
         PostsFragmentbinding!!.progressBar.isVisible = true
+        // Inflate the layout for this fragment
         onFragmentsCreate()
         setListeners()
-        // Inflate the layout for this fragment
         return PostsFragmentbinding!!.root
     }
 
@@ -65,9 +67,6 @@ class AllPostsFragment : Fragment() {
         super.onStart()
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
 
     private fun onFragmentsCreate(){
         postsViewModel.getPosts()
@@ -76,11 +75,11 @@ class AllPostsFragment : Fragment() {
 
     private fun onPostsViewModelObserver(){
         postsViewModel.postsModel.observe(this, Observer { postsList ->
-            PostsFragmentbinding!!.progressBar.isVisible = false
             PostsFragmentbinding!!.allPostsRecyclerView.adapter = AllPostsRecyclerAdapter(postsList)
             { post ->
                 onPostDetailActivity(post)
             }
+            PostsFragmentbinding!!.progressBar.isVisible = false
         })
     }
 
