@@ -18,10 +18,12 @@ import com.example.mymessageapp.model.MessageData
 import com.example.mymessageapp.model.UserData
 import com.example.mymessageapp.model.PostsAPIBuilder
 import com.example.mymessageapp.model.data.PostsDataItem
+import com.example.mymessageapp.model.data.UserDataItem
 import com.example.mymessageapp.model.data.database.entities.toDataBaseData
 import com.example.mymessageapp.model.network.PostsService
 import com.example.mymessageapp.view.PostsDetailActivity
 import com.example.mymessageapp.view.adapters.AllPostsRecyclerAdapter
+import com.example.mymessageapp.view.adapters.FavoritesPostsRecyclerAdapter
 import com.example.mymessageapp.viewmodel.ChangeFavoriteStateViewModel
 import com.example.mymessageapp.viewmodel.PostsViewModel
 import kotlin.concurrent.thread
@@ -54,18 +56,15 @@ class AllPostsFragment : Fragment() {
         PostsFragmentbinding = FragmentAllPostsBinding.inflate(inflater, container, false)
         onFragmentsCreate()
         setListeners()
-        println("on create")
         // Inflate the layout for this fragment
         return PostsFragmentbinding!!.root
     }
 
     override fun onStart() {
         super.onStart()
-        println("on start")
     }
 
     override fun onAttach(context: Context) {
-        println("on Attach")
         super.onAttach(context)
     }
 
@@ -76,7 +75,6 @@ class AllPostsFragment : Fragment() {
 
     private fun onPostsViewModelObserver(){
         postsViewModel.postsModel.observe(this, Observer { postsList ->
-            postsList.forEach { post -> favoritesViewModel.getFavoriteState(post.toDataBaseData(), context!!.applicationContext) }
             PostsFragmentbinding!!.allPostsRecyclerView.adapter = AllPostsRecyclerAdapter(postsList)
             { post ->
                 onPostDetailActivity(post)
