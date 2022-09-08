@@ -3,6 +3,7 @@ package com.example.mymessageapp.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import com.example.mymessageapp.R
 import com.example.mymessageapp.databinding.PostsDetailActivityBinding
 import com.example.mymessageapp.model.data.PostsDataItem
@@ -23,11 +24,11 @@ class PostsDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         detailActivityBinding = PostsDetailActivityBinding.inflate(layoutInflater)
         setContentView(detailActivityBinding.root)
+        detailActivityBinding.commentsProgressBar.isVisible = true
         val post = intent.getParcelableExtra<PostsDataItem>(EXTRA_POST)
         onFavButtonClickListener(post!!)
         setPostData(post)
         getFavoriteState(post)
-
     }
 
     fun onFavButtonClickListener(post: PostsDataItem){
@@ -65,6 +66,7 @@ class PostsDetailActivity : AppCompatActivity() {
         commentsViewModel.getComments(post.id.toString())
         commentsViewModel.commentsModel.observe(this,
             {comments ->
+                detailActivityBinding.commentsProgressBar.isVisible = false
                 comments.forEach {
                     commentsList.add( "\'" + it.body + "\'")
                 }

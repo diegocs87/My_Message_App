@@ -3,7 +3,7 @@
     package="com.example.mymessageapp">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,9 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyMessageApp">
-        <activity android:name=".view.PostsDetailActivity"></activity>
-        <activity
-            android:name=".view.MainActivity"
+        <activity android:name=".view.SplashActivity" android:theme = "@style/splashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.PostsDetailActivity" />
+        <activity android:name=".view.MainActivity"/>
     </application>
 
 </manifest>
