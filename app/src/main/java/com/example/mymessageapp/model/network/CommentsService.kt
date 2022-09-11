@@ -5,8 +5,9 @@ import com.example.mymessageapp.model.data.CommentsDataItem
 import com.example.mymessageapp.model.data.UserDataItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class CommentsService {
+class CommentsService @Inject constructor() {
     suspend fun getComment(postId:String): List<CommentsDataItem> {
         return withContext(Dispatchers.IO){
             val response = PostsAPIBuilder.service.getCommentsById(postId)

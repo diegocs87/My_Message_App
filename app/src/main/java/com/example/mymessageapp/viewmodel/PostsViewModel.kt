@@ -5,11 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mymessageapp.model.data.PostsDataItem
 import com.example.mymessageapp.model.network.PostsService
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class PostsViewModel: ViewModel() {
+@HiltViewModel
+class PostsViewModel @Inject constructor(private val postsService: PostsService): ViewModel() {
     val postsModel = MutableLiveData<List<PostsDataItem>>()
-    val postsService = PostsService()
     fun getPosts(){
         viewModelScope.launch {
             val postsList = postsService.getPosts()

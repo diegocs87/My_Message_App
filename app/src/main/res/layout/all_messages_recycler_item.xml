@@ -11,14 +11,14 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         card_view:cardCornerRadius="10dp"
-        card_view:cardElevation="2dp"
+        card_view:cardElevation="1dp"
         card_view:cardUseCompatPadding="true"
         app:cardBackgroundColor="@color/lightGray">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="2dp"
+            android:layout_margin="1dp"
             android:orientation="horizontal">
 
             <ImageView

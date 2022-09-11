@@ -9,9 +9,12 @@ import com.example.mymessageapp.model.data.database.PostsDataBase
 import com.example.mymessageapp.model.data.database.dao.FavoritesDao
 import com.example.mymessageapp.model.data.database.entities.FavoritesEntity
 import com.example.mymessageapp.model.data.database.entities.toPostsData
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ChangeFavoriteStateViewModel(): ViewModel() {
+@HiltViewModel
+class ChangeFavoriteStateViewModel @Inject constructor(): ViewModel() {
     val isFavoriteModel = MutableLiveData<Boolean>()
     val favoritesList = MutableLiveData<List<PostsDataItem>>()
 
@@ -37,7 +40,7 @@ class ChangeFavoriteStateViewModel(): ViewModel() {
     }
 
     suspend fun getAllFavoritesList(favoritesDao: FavoritesDao){
-        var favoriteListEntity = favoritesDao.getAllFavorites()
+        val favoriteListEntity = favoritesDao.getAllFavorites()
         favoritesList.postValue(favoriteListEntity.map { it.toPostsData()})
     }
 

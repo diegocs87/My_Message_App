@@ -1,6 +1,5 @@
 package com.example.mymessageapp.view
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -13,11 +12,14 @@ import com.example.mymessageapp.view.adapters.CommentRecyclerAdapter
 import com.example.mymessageapp.viewmodel.ChangeFavoriteStateViewModel
 import com.example.mymessageapp.viewmodel.CommentsViewModel
 import com.example.mymessageapp.viewmodel.UsersViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 
-class PostsDetailActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class PostsDetailActivity: AppCompatActivity() {
 
     private lateinit var detailActivityBinding : PostsDetailActivityBinding
+
     private val usersViewModel: UsersViewModel by viewModels()
     private val commentsViewModel: CommentsViewModel by viewModels ()
     private val favoritesViewModel: ChangeFavoriteStateViewModel by viewModels()
@@ -40,9 +42,9 @@ class PostsDetailActivity : AppCompatActivity() {
     }
     fun getFavoriteState(post:PostsDataItem){
         favoritesViewModel.getFavoriteState(post.toDataBaseData(), application)
-        favoritesViewModel.isFavoriteModel.observe(this, {isFav ->
+        favoritesViewModel.isFavoriteModel.observe(this) { isFav ->
             onFavButtonResState(isFav)
-        })
+        }
     }
 
     fun setPostData(post:PostsDataItem){
@@ -53,27 +55,27 @@ class PostsDetailActivity : AppCompatActivity() {
 
     fun setUserData(post:PostsDataItem){
         usersViewModel.getUser(post.userId.toString())
-        usersViewModel.usersModel.observe(this,
-            {userList ->
-                detailActivityBinding.userNameBody.text = userList.name
-                detailActivityBinding.userMailBody.text = userList.email
-                detailActivityBinding.userPhoneBody.text = userList.phone
-                detailActivityBinding.userWebBody.text = userList.website
-            })
+        usersViewModel.usersModel.observe(this
+        ) { userList ->
+            detailActivityBinding.userNameBody.text = userList.name
+            detailActivityBinding.userMailBody.text = userList.email
+            detailActivityBinding.userPhoneBody.text = userList.phone
+            detailActivityBinding.userWebBody.text = userList.website
+        }
     }
 
     fun setCommentsData(post:PostsDataItem){
-        var commentsList = mutableListOf("")
+        val commentsList = mutableListOf("")
         commentsList.remove("")
         commentsViewModel.getComments(post.id.toString())
-        commentsViewModel.commentsModel.observe(this,
-            {comments ->
-                detailActivityBinding.commentsProgressBar.isVisible = false
-                comments.forEach {
-                    commentsList.add( "\'" + it.body + "\'")
-                }
-                detailActivityBinding.rvCommentsList.adapter = CommentRecyclerAdapter(commentsList)
-            })
+        commentsViewModel.commentsModel.observe(this
+        ) { comments ->
+            detailActivityBinding.commentsProgressBar.isVisible = false
+            comments.forEach {
+                commentsList.add("\'" + it.body + "\'")
+            }
+            detailActivityBinding.rvCommentsList.adapter = CommentRecyclerAdapter(commentsList)
+        }
     }
 
     fun onFavButtonResState(isFavorite: Boolean){

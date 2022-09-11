@@ -28,6 +28,8 @@ import com.example.mymessageapp.view.adapters.AllPostsRecyclerAdapter
 import com.example.mymessageapp.view.adapters.FavoritesPostsRecyclerAdapter
 import com.example.mymessageapp.viewmodel.ChangeFavoriteStateViewModel
 import com.example.mymessageapp.viewmodel.PostsViewModel
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.concurrent.thread
 
 // TODO: Rename parameter arguments, choose names that match
@@ -35,6 +37,7 @@ import kotlin.concurrent.thread
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
+@AndroidEntryPoint
 class AllPostsFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
