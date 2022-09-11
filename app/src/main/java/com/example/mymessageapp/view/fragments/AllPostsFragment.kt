@@ -1,36 +1,25 @@
 package com.example.mymessageapp.view.fragments
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.transition.Visibility
 import com.example.mymessageapp.databinding.FragmentAllPostsBinding
-import com.example.mymessageapp.model.MessageData
-import com.example.mymessageapp.model.UserData
-import com.example.mymessageapp.model.PostsAPIBuilder
-import com.example.mymessageapp.model.data.CommentsDataItem
 import com.example.mymessageapp.model.data.PostsDataItem
-import com.example.mymessageapp.model.data.UserDataItem
 import com.example.mymessageapp.model.data.database.entities.toDataBaseData
-import com.example.mymessageapp.model.network.PostsService
+import com.example.mymessageapp.model.data.database.entities.toDataPostBaseData
 import com.example.mymessageapp.view.PostsDetailActivity
 import com.example.mymessageapp.view.adapters.AllPostsRecyclerAdapter
-import com.example.mymessageapp.view.adapters.FavoritesPostsRecyclerAdapter
 import com.example.mymessageapp.viewmodel.ChangeFavoriteStateViewModel
 import com.example.mymessageapp.viewmodel.PostsViewModel
-import dagger.hilt.EntryPoint
+
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.concurrent.thread
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -74,16 +63,24 @@ class AllPostsFragment : Fragment() {
     private fun onFragmentsCreate(){
         postsViewModel.getPosts()
         onPostsViewModelObserver()
+        onDataBaseSaveObserver()
     }
 
     private fun onPostsViewModelObserver(){
-        postsViewModel.postsModel.observe(this, Observer { postsList ->
+        postsViewModel.postsModel.observe(viewLifecycleOwner, Observer { postsList ->
+            postsViewModel.savePosts(requireContext(), postsList.map {postsDataItem -> postsDataItem.toDataPostBaseData()})
             PostsFragmentbinding!!.allPostsRecyclerView.adapter = AllPostsRecyclerAdapter(postsList)
             { post ->
                 onPostDetailActivity(post)
             }
             PostsFragmentbinding!!.progressBar.isVisible = false
         })
+    }
+
+    private fun onDataBaseSaveObserver(){
+        postsViewModel.savePostsModel.observe(viewLifecycleOwner) {
+            Toast.makeText(context, "Posts saved on DB", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setListeners(){

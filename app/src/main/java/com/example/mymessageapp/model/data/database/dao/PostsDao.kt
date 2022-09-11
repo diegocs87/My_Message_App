@@ -1,12 +1,9 @@
 package com.example.mymessageapp.model.data.database.dao
 
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.mymessageapp.model.data.database.entities.PostsEntity
 
-
+@Dao
 interface PostsDao {
     @Query("SELECT * FROM posts_table")
     suspend fun getAllPosts(): List<PostsEntity>
