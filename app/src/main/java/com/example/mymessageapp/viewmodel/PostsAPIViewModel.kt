@@ -14,21 +14,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PostsViewModel @Inject constructor(private val postsService: PostsAPIService,
-private val dataBaseService: PostDataBaseService): ViewModel() {
+class PostsAPIViewModel @Inject constructor(private val postsService: PostsAPIService)
+: ViewModel() {
+
     val postsModel = MutableLiveData<List<PostsDataItem>>()
-    val savePostsModel = MutableLiveData<Boolean>()
-    fun getPosts(){
+    fun getPosts() {
         viewModelScope.launch {
             val postsList = postsService.getPosts()
             postsModel.postValue(postsList)
-        }
-    }
-
-    fun savePosts(context: Context, postsList: List<PostsEntity>){
-        viewModelScope.launch {
-            dataBaseService.savePosts(context, postsList)
-            savePostsModel.postValue(true)
         }
     }
 }

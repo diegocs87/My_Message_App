@@ -8,6 +8,12 @@ interface PostsDao {
     @Query("SELECT * FROM posts_table")
     suspend fun getAllPosts(): List<PostsEntity>
 
+    @Query("SELECT * FROM posts_table ORDER BY id LIMIT 1")
+    suspend fun getTableState(): PostsEntity
+
+    @Query("DELETE FROM posts_table")
+    suspend fun deleteAll()
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllPosts(postList: List<PostsEntity>)
 
