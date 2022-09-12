@@ -5,11 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mymessageapp.model.data.UserDataItem
 import com.example.mymessageapp.model.network.UsersService
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class UsersViewModel: ViewModel() {
+@HiltViewModel
+class UsersViewModel @Inject constructor(private val userService:UsersService): ViewModel() {
     val usersModel = MutableLiveData<UserDataItem>()
-    val userService = UsersService()
     fun getUser(userId: String){
         viewModelScope.launch {
             val userList = userService.getUsers(userId)
