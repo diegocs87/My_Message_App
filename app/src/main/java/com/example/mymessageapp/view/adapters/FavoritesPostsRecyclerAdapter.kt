@@ -15,8 +15,8 @@ class FavoritesPostsRecyclerAdapter (private val posts: List<PostsDataItem>, pri
         parent: ViewGroup, viewType: Int): PostsHolder {
         postFavViewItemBinding = AllMessagesRecyclerItemBinding.inflate(
             LayoutInflater.from(parent.context),
-            parent, false);
-        return PostsHolder(postFavViewItemBinding);
+            parent, false)
+        return PostsHolder(postFavViewItemBinding)
     }
 
     override fun onBindViewHolder(holder: PostsHolder, position: Int) {

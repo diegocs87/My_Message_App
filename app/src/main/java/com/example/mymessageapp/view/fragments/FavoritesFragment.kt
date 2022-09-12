@@ -1,6 +1,5 @@
 package com.example.mymessageapp.view.fragments
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,6 +12,7 @@ import com.example.mymessageapp.model.data.PostsDataItem
 import com.example.mymessageapp.view.PostsDetailActivity
 import com.example.mymessageapp.view.adapters.FavoritesPostsRecyclerAdapter
 import com.example.mymessageapp.viewmodel.ChangeFavoriteStateViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,6 +24,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [FavoritesFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class FavoritesFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -54,20 +55,19 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun onFragmentsCreate(){
-        favoritesViewModel.getAllFavorites(context!!.applicationContext)
+        favoritesViewModel.getAllFavorites()
         onFavoritesListObserver()
     }
 
     private fun onFavoritesListObserver(){
-        favoritesViewModel.favoritesList.observe(this,
-            {favList ->
-                favoritesFragmentbinding!!.favPostsRecyclerView.adapter =
-                    FavoritesPostsRecyclerAdapter(favList)
-                    { post ->
-                        onPostDetailActivity(post)
-                    }
-            }
-        )
+        favoritesViewModel.favoritesList.observe(this
+        ) { favList ->
+            favoritesFragmentbinding!!.favPostsRecyclerView.adapter =
+                FavoritesPostsRecyclerAdapter(favList)
+                { post ->
+                    onPostDetailActivity(post)
+                }
+        }
     }
 
     private fun onPostDetailActivity (postData: PostsDataItem){

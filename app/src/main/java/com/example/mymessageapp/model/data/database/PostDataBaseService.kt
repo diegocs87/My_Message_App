@@ -1,36 +1,32 @@
 package com.example.mymessageapp.model.data.database
 
-import android.content.Context
+import com.example.mymessageapp.model.data.database.dao.PostsDao
 import com.example.mymessageapp.model.data.database.entities.PostsEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class PostDataBaseService @Inject constructor() {
-    suspend fun savePosts(context: Context, postsList: List<PostsEntity>) {
+class PostDataBaseService @Inject constructor(private val postsDao: PostsDao) {
+    suspend fun savePosts(postsList: List<PostsEntity>) {
         withContext(Dispatchers.IO){
-            val postsDao = PostsDataBase.buildDatabase(context).postsDao()
             postsDao.insertAllPosts(postsList)
         }
     }
 
-    suspend fun getPosts(context: Context): List<PostsEntity> {
+    suspend fun getPosts(): List<PostsEntity> {
         return withContext(Dispatchers.IO){
-            val postsDao = PostsDataBase.buildDatabase(context).postsDao()
             postsDao.getAllPosts()
         }
     }
 
-    suspend fun getDBState(context: Context) : Boolean {
+    suspend fun getDBState() : Boolean {
         return withContext(Dispatchers.IO){
-            val postsDao = PostsDataBase.buildDatabase(context).postsDao()
             postsDao.getTableState() == null
         }
     }
 
-    suspend fun deleteALL(context: Context) {
+    suspend fun deleteALL() {
         withContext(Dispatchers.IO){
-            val postsDao = PostsDataBase.buildDatabase(context).postsDao()
             postsDao.deleteAll()
         }
     }

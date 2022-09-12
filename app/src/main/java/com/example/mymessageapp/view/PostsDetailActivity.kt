@@ -37,11 +37,11 @@ class PostsDetailActivity: AppCompatActivity() {
 
     fun onFavButtonClickListener(post: PostsDataItem){
         detailActivityBinding.postFavorite.setOnClickListener {
-            favoritesViewModel.setFavoriteState(post.toDataBaseData(), application)
+            favoritesViewModel.setFavoriteState(post.toDataBaseData())
         }
     }
     fun getFavoriteState(post:PostsDataItem){
-        favoritesViewModel.getFavoriteState(post.toDataBaseData(), application)
+        favoritesViewModel.getFavoriteState(post.toDataBaseData())
         favoritesViewModel.isFavoriteModel.observe(this) { isFav ->
             onFavButtonResState(isFav)
         }
