@@ -1,8 +1,6 @@
 package com.example.mymessageapp.model.data.database
 
 import android.content.Context
-import com.example.mymessageapp.model.PostsAPIBuilder
-import com.example.mymessageapp.model.data.PostsDataItem
 import com.example.mymessageapp.model.data.database.entities.PostsEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
