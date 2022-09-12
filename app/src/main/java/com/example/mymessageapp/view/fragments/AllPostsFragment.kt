@@ -9,13 +9,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.example.mymessageapp.databinding.FragmentAllPostsBinding
 import com.example.mymessageapp.model.data.PostsDataItem
 import com.example.mymessageapp.model.data.database.entities.toDataPostBaseData
 import com.example.mymessageapp.view.PostsDetailActivity
 import com.example.mymessageapp.view.adapters.AllPostsRecyclerAdapter
-import com.example.mymessageapp.viewmodel.ChangeFavoriteStateViewModel
 import com.example.mymessageapp.viewmodel.PostsAPIViewModel
 import com.example.mymessageapp.viewmodel.PostsDBViewModel
 
@@ -56,7 +54,7 @@ class AllPostsFragment : Fragment() {
     }
 
     private fun getDataSource(){
-        postsDBViewModel.getDBState(requireContext())
+        postsDBViewModel.getDBState()
         postsDBViewModel.savePostsDBModel.observe(viewLifecycleOwner){
             isEmpty ->
             if(isEmpty){
@@ -74,7 +72,7 @@ class AllPostsFragment : Fragment() {
     }
 
     private fun getPostsFromDB(){
-        postsDBViewModel.getPosts(requireContext())
+        postsDBViewModel.getPosts()
         onPostsDBViewModelObserver()
         Toast.makeText(context, "Posts getted from DB", Toast.LENGTH_SHORT).show()
     }
@@ -92,8 +90,8 @@ class AllPostsFragment : Fragment() {
 
 
     private fun onPostsAPIViewModelObserver(isSave: Boolean){
-        postsViewModel.postsModel.observe(viewLifecycleOwner, Observer { postsList ->
-            if(isSave) {
+        postsViewModel.postsModel.observe(viewLifecycleOwner) { postsList ->
+            if (isSave) {
                 savePostsFromAPItoDB(postsList)
             }
             PostsFragmentbinding!!.allPostsRecyclerView.adapter = AllPostsRecyclerAdapter(postsList)
@@ -101,11 +99,11 @@ class AllPostsFragment : Fragment() {
                 onPostDetailActivity(post)
             }
             PostsFragmentbinding!!.progressBar.isVisible = false
-        })
+        }
     }
 
     private fun savePostsFromAPItoDB(postsList: List<PostsDataItem>){
-        postsDBViewModel.savePosts(requireContext(), postsList.map {postsDataItem -> postsDataItem.toDataPostBaseData()})
+        postsDBViewModel.savePosts(postsList.map {postsDataItem -> postsDataItem.toDataPostBaseData()})
     }
 
     private fun setListeners(){
@@ -121,7 +119,7 @@ class AllPostsFragment : Fragment() {
 
     private fun onDeleteAllButtonClickListener(){
         PostsFragmentbinding!!.deleteallbutton.setOnClickListener{ view ->
-            postsDBViewModel.deleteAll(requireContext())
+            postsDBViewModel.deleteAll()
             PostsFragmentbinding!!.allPostsRecyclerView.adapter = AllPostsRecyclerAdapter(emptyList()){ post ->
 
             }

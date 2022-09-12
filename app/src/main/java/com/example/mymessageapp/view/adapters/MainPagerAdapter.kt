@@ -1,6 +1,5 @@
 package com.example.mymessageapp.view.adapters
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -15,12 +14,12 @@ class MainPagerAdapter (fragment: FragmentActivity) : FragmentStateAdapter(fragm
         // Return a NEW fragment instance in createFragment(int)
         val fragmentAll = AllPostsFragment()
         val fragmentFavorites = FavoritesFragment()
-        when (position) {
-            0 -> return fragmentAll
+        return when (position) {
+            0 -> fragmentAll
 
-            1-> return fragmentFavorites
+            1-> fragmentFavorites
 
-            else -> return fragmentAll
+            else -> fragmentAll
         }
     }
 }

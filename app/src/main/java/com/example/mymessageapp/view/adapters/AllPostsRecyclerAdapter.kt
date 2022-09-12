@@ -2,7 +2,6 @@ package com.example.mymessageapp.view.adapters
 
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -18,8 +17,8 @@ class AllPostsRecyclerAdapter (private val posts: List<PostsDataItem>, private v
         parent: ViewGroup, viewType: Int): MessageHolder {
         postCardViewItemBinding = AllMessagesRecyclerItemBinding.inflate(
             LayoutInflater.from(parent.context),
-            parent, false);
-        return MessageHolder(postCardViewItemBinding);
+            parent, false)
+        return MessageHolder(postCardViewItemBinding)
     }
 
     override fun onBindViewHolder(holder: MessageHolder, position: Int) {

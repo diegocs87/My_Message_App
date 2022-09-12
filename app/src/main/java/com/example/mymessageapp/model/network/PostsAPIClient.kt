@@ -3,7 +3,6 @@ package com.example.mymessageapp.model.network
 import com.example.mymessageapp.model.data.CommentsDataItem
 import com.example.mymessageapp.model.data.PostsDataItem
 import com.example.mymessageapp.model.data.UserDataItem
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

@@ -1,11 +1,9 @@
 package com.example.mymessageapp.viewmodel
 
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mymessageapp.model.data.PostsDataItem
-import com.example.mymessageapp.model.data.database.PostsDataBase
 import com.example.mymessageapp.model.data.database.dao.FavoritesDao
 import com.example.mymessageapp.model.data.database.entities.FavoritesEntity
 import com.example.mymessageapp.model.data.database.entities.toPostsData
@@ -14,37 +12,35 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ChangeFavoriteStateViewModel @Inject constructor(): ViewModel() {
+class ChangeFavoriteStateViewModel @Inject constructor(private val favoritesDao: FavoritesDao):
+    ViewModel() {
     val isFavoriteModel = MutableLiveData<Boolean>()
     val favoritesList = MutableLiveData<List<PostsDataItem>>()
 
-    fun getFavoriteState(favPost: FavoritesEntity, context: Context){
-        val favoritesDao = PostsDataBase.buildDatabase(context).favoritesDao()
+    fun getFavoriteState(favPost: FavoritesEntity){
         viewModelScope.launch {
-            getFavoriteState(favoritesDao, favPost)
+            getFavoriteStateFromDao(favPost)
         }
     }
 
-    fun setFavoriteState(favPost: FavoritesEntity, context: Context){
-        val favoritesDao = PostsDataBase.buildDatabase(context).favoritesDao()
+    fun setFavoriteState(favPost: FavoritesEntity){
         viewModelScope.launch {
-            setFavoriteState(favoritesDao, favPost)
+            setFavoriteStateFromDao(favPost)
         }
     }
 
-    fun getAllFavorites(context: Context){
-        val favoritesDao = PostsDataBase.buildDatabase(context).favoritesDao()
+    fun getAllFavorites(){
         viewModelScope.launch {
-            getAllFavoritesList(favoritesDao)
+            getAllFavoritesList()
         }
     }
 
-    suspend fun getAllFavoritesList(favoritesDao: FavoritesDao){
+    suspend fun getAllFavoritesList(){
         val favoriteListEntity = favoritesDao.getAllFavorites()
         favoritesList.postValue(favoriteListEntity.map { it.toPostsData()})
     }
 
-    suspend fun getFavoriteState(favoritesDao: FavoritesDao, favPost: FavoritesEntity){
+    suspend fun getFavoriteStateFromDao(favPost: FavoritesEntity){
         if(favoritesDao.getFavoriteStatus(favPost.tittle) == null){
             isFavoriteModel.postValue(false)
         }else{
@@ -52,7 +48,7 @@ class ChangeFavoriteStateViewModel @Inject constructor(): ViewModel() {
         }
     }
 
-    suspend fun setFavoriteState(favoritesDao: FavoritesDao, favPost: FavoritesEntity){
+    suspend fun setFavoriteStateFromDao(favPost: FavoritesEntity){
         if(favoritesDao.getFavoriteStatus(favPost.tittle) == null){
             favoritesDao.insertFavorite(favPost)
             isFavoriteModel.postValue(true)

@@ -7,7 +7,6 @@ import com.example.mymessageapp.databinding.ActivityMainBinding
 import com.example.mymessageapp.view.adapters.MainPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
